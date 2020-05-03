@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
-function App() {
+const App = () => {
+
+  const [inputValue, setInputValue] = useState("");
+
+  const [array, setArray] = useState([]);
+
+  const changeInputValue = (e) => setInputValue(e.target.value);
+
+  const handleClickGurd = () => {
+    setArray([...array, inputValue]);
+    setInputValue("");
+  };
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <input value={inputValue} onChange={changeInputValue} />
+        <button onClick={handleClickGurd}>Ajouter</button>
+      </div>
+      {array.map((ele) => (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <b>{ele}</b>
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default App;
